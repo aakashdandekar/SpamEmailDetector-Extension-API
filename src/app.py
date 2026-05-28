@@ -1,10 +1,10 @@
 import os
 import joblib
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from src.models.schemas import Request
+from src.models.schemas import ModelRequest
 
 app = FastAPI()
 app.add_middleware(
@@ -28,12 +28,14 @@ with open(model_path, "rb") as f:
     model = joblib.load(f)
 
 @app.get('/', response_class=HTMLResponse)
-async def home():
-    return template.TemplateResponse("index.html")
+async def home(
+    request: Request
+):
+    return template.TemplateResponse("index.html", {"request": request})
 
 @app.post('/predict')
 async def predict(
-    request: Request
+    request: ModelRequest
 ):
     try:
         text = vectorizer.transform([request.email])
