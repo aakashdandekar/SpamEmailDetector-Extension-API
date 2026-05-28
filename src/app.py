@@ -17,7 +17,7 @@ app.add_middleware(
 
 template = Jinja2Templates(directory="templates")
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 vectorizer_path = os.path.join(BASE_DIR, 'src/assets/vectorizer.pkl')
