@@ -20,8 +20,8 @@ template = Jinja2Templates(directory="templates")
 BASE_DIR = Path(__file__).resolve().parent
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-vectorizer_path = os.path.join(BASE_DIR, 'assets/vectorizer.pkl')
-model_path = os.path.join(BASE_DIR, 'assets/model.pkl')
+vectorizer_path = os.path.join(BASE_DIR, 'src/assets/vectorizer.pkl')
+model_path = os.path.join(BASE_DIR, 'src/assets/model.pkl')
 
 with open(vectorizer_path, "rb") as f:
     vectorizer = joblib.load(f)
