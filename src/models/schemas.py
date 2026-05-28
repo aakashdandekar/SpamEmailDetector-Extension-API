@@ -1,4 +1,4 @@
 from pydantic import BaseModel
 
-class Request(BaseModel):
+class ModelRequest(BaseModel):
     email: str
