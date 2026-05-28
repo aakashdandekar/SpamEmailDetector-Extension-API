@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from pathlib import Path
 from src.models.schemas import ModelRequest
 
 app = FastAPI()
@@ -15,9 +16,10 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+BASE = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-template = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
+template = Jinja2Templates(directory=os.path.join(BASE, "templates"))
 
 vectorizer_path = os.path.join(BASE_DIR, 'assets/vectorizer.pkl')
 model_path = os.path.join(BASE_DIR, 'assets/EmailSpamDetectionModel.pkl')
