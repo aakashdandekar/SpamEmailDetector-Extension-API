@@ -1,6 +1,8 @@
 import joblib
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 from pathlib import Path
 from src.models.schemas import Request
 
@@ -8,10 +10,12 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=["*"],
+    allow_credintials=["*"],
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+template = Jinja2Templates(directory="templates")
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -23,6 +27,10 @@ with open(vectorizer_path, "rb") as f:
 
 with open(model_path, "rb") as f:
     model = joblib.load(f)
+
+@app.get('/', response_class=HTMLResponse)
+async def home():
+    return template.TemplateResponse("index.html")
 
 @app.post('/predict')
 async def predict(
@@ -44,9 +52,3 @@ async def predict(
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {e}")
-    
-@app.get('/')
-async def root():
-    return {
-        "message": "Email Spam Detetion"
-    }
