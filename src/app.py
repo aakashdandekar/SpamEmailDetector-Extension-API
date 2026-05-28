@@ -1,6 +1,7 @@
 import pickle
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
 from src.models.schemas import Request
 
 app = FastAPI()
@@ -12,11 +13,16 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-with open("./assets/vectorizer.pkl", "rb") as file:
-    vectorizer = pickle.load(file)
+BASE_DIR = Path(__file__).resolve().parent
 
-with open("./assets/EmailSpamDetectionModel.pkl", "rb") as file:
-    model = pickle.load(file)
+vectorizer_path = BASE_DIR / "assets" / "vectorizer.pkl"
+model_path = BASE_DIR / "assets" / "EmailSpamDetectionModel.pkl"
+
+with open(vectorizer_path, "rb") as f:
+    vectorizer = pickle.load(f)
+
+with open(model_path, "rb") as f:
+    model = pickle.load(f)
 
 @app.post('/predict')
 async def predict(
