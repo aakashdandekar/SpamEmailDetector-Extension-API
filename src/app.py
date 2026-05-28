@@ -15,9 +15,10 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-template = Jinja2Templates(directory="templates")
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+template = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates")
+
 vectorizer_path = os.path.join(BASE_DIR, 'assets/vectorizer.pkl')
 model_path = os.path.join(BASE_DIR, 'assets/EmailSpamDetectionModel.pkl')
 
