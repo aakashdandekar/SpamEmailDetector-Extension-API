@@ -4,6 +4,6 @@ scikit-learn
 numpy
 scipy
 joblib
-python-mutipart
+python-multipart
 xgboost
 scikit-learn
