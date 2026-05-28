@@ -6,4 +6,4 @@ scipy
 joblib
 python-multipart
 xgboost
-scikit-learn
+jinja2
