@@ -1,9 +1,9 @@
+import os
 import joblib
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from pathlib import Path
 from src.models.schemas import Request
 
 app = FastAPI()
@@ -19,8 +19,9 @@ template = Jinja2Templates(directory="templates")
 
 BASE_DIR = Path(__file__).resolve().parent
 
-vectorizer_path = BASE_DIR / "assets" / "vectorizer.pkl"
-model_path = BASE_DIR / "assets" / "EmailSpamDetectionModel.pkl"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+vectorizer_path = os.path.join(BASE_DIR, 'assets/vectorizer.pkl')
+model_path = os.path.join(BASE_DIR, 'assets/model.pkl')
 
 with open(vectorizer_path, "rb") as f:
     vectorizer = joblib.load(f)
