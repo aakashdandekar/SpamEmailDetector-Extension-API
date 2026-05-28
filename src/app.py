@@ -31,7 +31,7 @@ with open(model_path, "rb") as f:
 async def home(
     request: Request
 ):
-    return template.TemplateResponse(request=request, "index.html")
+    return template.TemplateResponse(request=request, name="index.html")
 
 @app.post('/predict')
 async def predict(
