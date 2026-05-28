@@ -1,4 +1,4 @@
-# Email Spam Detector API
+# Spam Email Detector API
 
 A FastAPI-based REST API for detecting spam emails using a trained machine learning model.
 
