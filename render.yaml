@@ -1,0 +1,11 @@
+name: spam-email-detector-api
+type: web
+build:
+  run: pip install -r requirements.txt
+start:
+  run: uvicorn src.app:app --host 0.0.0.0 --port $PORT
+env:
+  - key: PORT
+    value: "5000"
+region: olympus
+plan: free
