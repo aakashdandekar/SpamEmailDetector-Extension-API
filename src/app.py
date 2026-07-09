@@ -56,3 +56,11 @@ async def predict(
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {e}")
+
+@app.get("/active")
+async def active(
+    request: Request
+):
+    return {
+        "message": "Server is active"
+    }
